@@ -1,0 +1,263 @@
+@import "tailwindcss";
+
+/* Sincroniza la variante "dark:" de Tailwind con nuestro selector de tema
+   real (next-themes usa el atributo data-theme), en vez de depender solo
+   de la preferencia del sistema operativo. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/*
+ * SISTEMA DE DISEÑO — LAPP SANC
+ * -------------------------------------------------------------------------
+ * Identidad premium inspirada en el logotipo metálico: negro profundo,
+ * plata metálica y blanco como contraste, con un azul eléctrico muy sutil
+ * reservado únicamente para interacción (botones, enlaces, foco). El tema
+ * oscuro es el predeterminado (":root"), ya que es donde el logotipo
+ * plateado tiene más presencia; ".light" lo sobreescribe para quien
+ * prefiera el modo claro. Todos los colores viven aquí como variables CSS
+ * para poder ajustarse desde un solo lugar.
+ */
+
+:root {
+  /* Fondo — negro profundo con capas muy sutiles de elevación */
+  --background: #050505;
+  --background-alt: #0a0a0c;
+  --surface: #0d0d10;
+  --surface-alt: #141417;
+
+  /* Texto — blanco y plata */
+  --foreground: #f4f4f6;
+  --foreground-muted: #9c9ea5;
+  --foreground-subtle: #65666d;
+
+  /* Acento — azul oscuro "mezclado con negro" (no azul eléctrico),
+     reservado únicamente para interacción */
+  --primary: #35507d;
+  --primary-hover: #43649a;
+  --primary-light: #6f88b3;
+  --primary-soft: #0d1119;
+
+  /* Plata metálica — detalles, iconografía, divisores con carácter */
+  --silver: #c7c9cf;
+  --silver-strong: #e7e8eb;
+
+  /* Bordes y sombras */
+  --border: #1d1d21;
+  --border-strong: #2b2b30;
+  --ring: #35507d;
+
+  --accent-dark: #f4f4f6;
+  --success: #34c98d;
+
+  --shadow-color: 0 0% 0%;
+  --radius: 1rem;
+
+  /*
+   * Altura real del navbar fijo. Este valor por defecto es solo un
+   * fallback antes de que el navbar termine de montarse; en cuanto lo
+   * hace, components/layout/navbar.tsx lo sobreescribe con su altura
+   * medida (ResizeObserver), así que el espaciado del resto del sitio
+   * siempre coincide con el navbar real en vez de un número adivinado.
+   */
+  --nav-height: 96px;
+}
+
+[data-theme="light"] {
+  --background: #ffffff;
+  --background-alt: #f4f5f7;
+  --surface: #ffffff;
+  --surface-alt: #eef0f3;
+
+  --foreground: #0c0c0e;
+  --foreground-muted: #55575f;
+  --foreground-subtle: #8b8d94;
+
+  --primary: #2a4a85;
+  --primary-hover: #233d6f;
+  --primary-light: #5877ab;
+  --primary-soft: #eaeef4;
+
+  --silver: #6b6d74;
+  --silver-strong: #3a3b40;
+
+  --border: #e4e5e9;
+  --border-strong: #d2d3d9;
+  --ring: #2a4a85;
+
+  --accent-dark: #0c0c0e;
+  --success: #1fa971;
+
+  --shadow-color: 220 25% 20%;
+}
+
+@theme inline {
+  --breakpoint-xs: 22rem;
+
+  --color-background: var(--background);
+  --color-background-alt: var(--background-alt);
+  --color-surface: var(--surface);
+  --color-surface-alt: var(--surface-alt);
+  --color-foreground: var(--foreground);
+  --color-foreground-muted: var(--foreground-muted);
+  --color-foreground-subtle: var(--foreground-subtle);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-light: var(--primary-light);
+  --color-primary-soft: var(--primary-soft);
+  --color-silver: var(--silver);
+  --color-silver-strong: var(--silver-strong);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-success: var(--success);
+
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-headline: var(--font-headline);
+
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-float-slow: float 9s ease-in-out infinite;
+  --animate-blob: blob 14s ease-in-out infinite;
+  --animate-pulse-dot: pulse-dot 2s ease-in-out infinite;
+  --animate-marquee: marquee 30s linear infinite;
+  --animate-shimmer: shimmer 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-14px) rotate(1deg); }
+}
+
+@keyframes blob {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(20px, -30px) scale(1.05); }
+  66% { transform: translate(-15px, 15px) scale(0.97); }
+}
+
+@keyframes pulse-dot {
+  0% { box-shadow: 0 0 0 0 rgba(53, 80, 125, 0.5); }
+  70% { box-shadow: 0 0 0 10px rgba(53, 80, 125, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(53, 80, 125, 0); }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* Barrido de brillo metálico muy sutil, usado sobre el icono del logo. */
+@keyframes shimmer {
+  0%, 88%, 100% { opacity: 0; transform: translateX(-60%) skewX(-12deg); }
+  92% { opacity: 0.5; }
+  96% { opacity: 0; transform: translateX(60%) skewX(-12deg); }
+}
+
+* {
+  border-color: var(--border);
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+}
+
+::selection {
+  background: var(--primary);
+  color: white;
+}
+
+/* Enfoque de teclado visible en toda la página (accesibilidad) */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.container-page {
+  width: 100%;
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+/*
+ * Se aplica a toda sección con id (destino de un enlace del navbar) para
+ * que, al saltar a ella, el navbar fijo nunca tape su contenido. Usa la
+ * misma variable --nav-height que ya sincroniza el propio navbar, en vez
+ * de repetir un valor de espaciado adivinado en cada sección.
+ */
+.section-anchor {
+  scroll-margin-top: calc(var(--nav-height) + 1rem);
+}
+
+@media (min-width: 768px) {
+  .container-page {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+}
+
+.text-gradient {
+  background: linear-gradient(90deg, var(--primary) 0%, var(--primary-light) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Texto con tratamiento "plata metálica", para titulares que deben
+   combinar con el logotipo sin depender del azul de acento. */
+.text-silver-gradient {
+  background: linear-gradient(120deg, var(--silver-strong) 0%, var(--foreground-muted) 45%, var(--silver-strong) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.card-shadow {
+  box-shadow: 0 1px 2px hsl(var(--shadow-color) / 0.3), 0 16px 40px -14px hsl(var(--shadow-color) / 0.55);
+}
+
+.glass {
+  background: color-mix(in srgb, var(--surface) 65%, transparent);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+}
+
+/* Respeta la preferencia del usuario por reducir movimiento */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Scrollbar discreto */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--foreground-subtle);
+}

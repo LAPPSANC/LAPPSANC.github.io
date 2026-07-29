@@ -25,9 +25,9 @@ export const siteConfig = {
   email: "lappsanc@gmail.com", // [EDITAR]
 
   social: {
-    facebook: "https://www.facebook.com/share/1EzQiNN2L9/", // [EDITAR]
+    facebook: "https://www.facebook.com/share/1DJo7Yvvv2/", // [EDITAR]
     instagram: "https://www.instagram.com/car._.occ?igsh=dDUxcGcwdG1uZm5p", // [EDITAR]
-    tiktok: "https://www.tiktok.com/@sa.nc_", // [EDITAR]
+    tiktok: "https://www.tiktok.com/@lapp.sanc?_r=1&_t=ZS-98QVALMA22W", // [EDITAR]
     github: "https://github.com/[USUARIO_DE_GITHUB]", // [EDITAR] — se usa solo internamente (ver README), ya no se muestra como canal de contacto
   },
 

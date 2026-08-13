@@ -10,7 +10,7 @@
 
 export const siteConfig = {
   name: "Carlos Manuel Sánchez Martínez",
-  displayName: "Carlos Sánchez", // Nombre corto usado en la sección "Sobre mí"
+  displayName: "Carlos Sánchez", // Nombre del fundador (ya no se muestra en "Sobre LAPP SANC", que ahora presenta la agencia; disponible por si se usa en otro lugar del sitio)
   shortName: "Carlos",
   brand: "LAPP SANC", // [EDITAR] si cambia la marca
   role: "Desarrollador web y creador de soluciones digitales",
@@ -21,13 +21,13 @@ export const siteConfig = {
 
   // Número de WhatsApp en formato internacional, sin espacios ni símbolos.
   // Ejemplo: "521XXXXXXXXXX"
-  whatsappNumber: "527204735879", // [EDITAR]
-  email: "lappsanc@gmail.com", // [EDITAR]
+  whatsappNumber: "[NUMERO_DE_WHATSAPP]", // [EDITAR]
+  email: "[CORREO_ELECTRONICO]", // [EDITAR]
 
   social: {
-    facebook: "https://www.facebook.com/share/1DJo7Yvvv2/", // [EDITAR]
-    instagram: "https://www.instagram.com/car._.occ?igsh=dDUxcGcwdG1uZm5p", // [EDITAR]
-    tiktok: "https://www.tiktok.com/@lapp.sanc?_r=1&_t=ZS-98QVALMA22W", // [EDITAR]
+    facebook: "[ENLACE_DE_FACEBOOK]", // [EDITAR]
+    instagram: "[ENLACE_DE_INSTAGRAM]", // [EDITAR]
+    tiktok: "[ENLACE_DE_TIKTOK]", // [EDITAR]
     github: "https://github.com/[USUARIO_DE_GITHUB]", // [EDITAR] — se usa solo internamente (ver README), ya no se muestra como canal de contacto
   },
 
@@ -49,10 +49,11 @@ export function buildWhatsAppLink(message: string) {
 
 export const whatsappMessages = {
   general:
-    "Hola, Carlos. Vi tu portafolio y me gustaría solicitar información para crear una página web para mi negocio.",
-  cta: "Hola, Carlos. Encontré tu portafolio y quiero información sobre una página web para mi negocio.",
-  service: (serviceName: string) =>
-    `Hola, Carlos. Me interesa el servicio de "${serviceName}" para mi negocio. ¿Podrías darme más información?`,
+    "¡Hola! 👋 Vi el portafolio de LAPP SANC y me gustaría solicitar información para crear una página web para mi negocio 🚀",
+  cta: "¡Hola! 👋 Encontré el portafolio de LAPP SANC y quiero información sobre una página web para mi negocio 🚀",
+  /** "¡Hola! 👋 Quiero información para Menú digital 🍽️" */
+  service: (serviceName: string, emoji: string) =>
+    `¡Hola! 👋 Quiero información para ${serviceName} ${emoji}`,
   project: (projectName: string) =>
-    `Hola, Carlos. Vi el proyecto "${projectName}" en tu portafolio y me gustaría algo similar para mi negocio.`,
+    `¡Hola! 👋 Vi el proyecto "${projectName}" en el portafolio de LAPP SANC y me gustaría algo similar para mi negocio ✨`,
 };

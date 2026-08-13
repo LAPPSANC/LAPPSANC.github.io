@@ -52,7 +52,7 @@ export function Services() {
                   )}
 
                   <a
-                    href={buildWhatsAppLink(whatsappMessages.service(service.title))}
+                    href={buildWhatsAppLink(whatsappMessages.service(service.title, service.emoji))}
                     target="_blank"
                     rel="noopener noreferrer nofollow"
                     className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-primary group-hover:gap-2.5 group-active:gap-2.5 transition-all"

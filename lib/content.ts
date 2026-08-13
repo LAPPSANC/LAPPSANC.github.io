@@ -37,6 +37,9 @@ import {
   BookOpen,
   Store,
   Lightbulb,
+  Globe2,
+  Bot,
+  PhoneCall,
 } from "lucide-react";
 
 export const navLinks = [
@@ -45,7 +48,7 @@ export const navLinks = [
   { href: "#servicios", label: "Servicios" },
   { href: "#proyectos", label: "Proyectos" },
   { href: "#proceso", label: "Proceso" },
-  { href: "#sobre-mi", label: "Sobre mí" },
+  { href: "#sobre-mi", label: "Nosotros" },
   { href: "#contacto", label: "Contacto" },
 ];
 
@@ -118,6 +121,8 @@ export const benefits: Benefit[] = [
 export type Service = {
   icon: LucideIcon;
   title: string;
+  /** Usado en el mensaje de WhatsApp: "Quiero información para {title} {emoji}" */
+  emoji: string;
   description: string;
   items: string[];
   note?: string;
@@ -127,6 +132,7 @@ export const services: Service[] = [
   {
     icon: FileText,
     title: "Página web informativa",
+    emoji: "🌐",
     description: "Ideal para negocios que necesitan mostrar:",
     items: [
       "Quiénes son",
@@ -141,6 +147,7 @@ export const services: Service[] = [
   {
     icon: ShoppingBag,
     title: "Catálogo digital",
+    emoji: "🛍️",
     description: "Ideal para mostrar:",
     items: ["Productos", "Fotografías", "Precios", "Características", "Categorías", "Promociones", "Botón de WhatsApp"],
     note: "El catálogo puede funcionar sin carrito de compras ni pagos en línea.",
@@ -148,36 +155,70 @@ export const services: Service[] = [
   {
     icon: Briefcase,
     title: "Página para servicios profesionales",
+    emoji: "💼",
     description: "Dirigida a:",
     items: ["Abogados", "Contadores", "Arquitectos", "Técnicos", "Fotógrafos", "Profesores", "Consultores", "Profesionistas independientes"],
   },
   {
     icon: User,
     title: "Portafolio profesional",
+    emoji: "📁",
     description: "Para mostrar:",
     items: ["Experiencia", "Trabajos realizados", "Habilidades", "Proyectos", "Información de contacto"],
   },
   {
     icon: UtensilsCrossed,
     title: "Menú digital",
+    emoji: "🍽️",
     description: "Para restaurantes, cafeterías, reposterías y negocios de comida:",
     items: ["Platillos", "Precios", "Bebidas", "Promociones", "Horarios", "Pedidos mediante WhatsApp"],
   },
   {
+    icon: Bot,
+    title: "Asistentes de IA para WhatsApp y web",
+    emoji: "🤖",
+    description: "Atención automática, entrenada con la información real de tu negocio:",
+    items: [
+      "Responde preguntas frecuentes",
+      "Disponible las 24 horas",
+      "Conoce tu catálogo, precios y horarios",
+      "Mantiene el contexto de la conversación",
+      "Deriva a una persona cuando hace falta",
+    ],
+    note: "La IA solo usa la información que tú le proporciones — nunca inventa datos.",
+  },
+  {
+    icon: PhoneCall,
+    title: "Atención telefónica con IA",
+    emoji: "📞",
+    description: "Un asistente que también puede contestar llamadas:",
+    items: [
+      "Responde llamadas entrantes por voz",
+      "Informa horarios, ubicación y precios",
+      "Recopila los datos del cliente",
+      "Transfiere la llamada a una persona si hace falta",
+      "Puede funcionar fuera de tu horario habitual",
+    ],
+    note: "Ideal para negocios que no siempre pueden contestar el teléfono a tiempo.",
+  },
+  {
     icon: RefreshCcw,
     title: "Rediseño de páginas",
+    emoji: "🔄",
     description: "Para mejorar sitios antiguos o poco adaptables a teléfonos.",
     items: ["Diseño moderno", "Optimización móvil", "Mejora de velocidad", "Actualización de contenido"],
   },
   {
     icon: Rocket,
     title: "Publicación de páginas",
+    emoji: "🚀",
     description: "Incluye:",
     items: ["Configuración de GitHub Pages", "Vinculación de dominio, cuando el cliente tenga uno", "Optimización básica", "Configuración de enlaces y botones"],
   },
   {
     icon: PartyPopper,
     title: "Invitaciones digitales para eventos",
+    emoji: "🎉",
     description: "Ideal para celebrar sin imprimir nada:",
     items: ["Bodas", "XV años", "Bautizos", "Cumpleaños", "Graduaciones", "Eventos empresariales"],
     note: "Se comparten con un enlace, sin costo de impresión ni envíos.",
@@ -185,6 +226,7 @@ export const services: Service[] = [
   {
     icon: Wrench,
     title: "Mantenimiento",
+    emoji: "🛠️",
     description: "Servicio opcional que incluye:",
     items: ["Cambio de precios", "Actualización de productos", "Modificación de fotografías", "Nuevas promociones", "Ajustes de textos", "Corrección de enlaces"],
   },
@@ -462,5 +504,46 @@ export const skillCategories: SkillCategory[] = [
       "IA aplicada a negocios",
       "Optimización de procesos",
     ],
+  },
+];
+
+/**
+ * Presentación de la agencia para la sección "Sobre LAPP SANC". Resume el
+ * documento de marca sin duplicar contenido que ya vive en otras
+ * secciones del sitio (el proceso de trabajo ya está en "Proceso" y el
+ * detalle de servicios ya está en "Servicios").
+ */
+export const agencyIntro = {
+  tagline: "Tecnología, diseño y estrategia para hacer crecer tu negocio",
+  paragraphs: [
+    "LAPP SANC es una agencia digital enfocada en ayudar a pequeños negocios, emprendimientos y profesionales a construir una presencia digital profesional.",
+    "No nos limitamos a crear páginas web. Diseñamos soluciones pensadas para las necesidades reales de cada negocio: catálogos digitales, automatización y soluciones con inteligencia artificial.",
+  ],
+  quote:
+    "No creamos páginas genéricas. Cada proyecto responde a lo que el negocio necesita, lo que el cliente busca, y cómo la tecnología puede ayudar a ambos.",
+};
+
+export type AgencyPillar = { icon: LucideIcon; title: string; description: string };
+
+export const agencyPillars: AgencyPillar[] = [
+  {
+    icon: Globe2,
+    title: "Presencia digital",
+    description: "Páginas web, catálogos, menús digitales, portafolios e invitaciones.",
+  },
+  {
+    icon: Bot,
+    title: "Automatización e IA",
+    description: "Chatbots y asistentes de WhatsApp que responden y organizan clientes.",
+  },
+  {
+    icon: PaletteIcon,
+    title: "Diseño y experiencia",
+    description: "Interfaces modernas, responsive y adaptadas a cada identidad.",
+  },
+  {
+    icon: TrendingUp,
+    title: "Soluciones para negocios",
+    description: "No solo un sitio: una solución que el negocio realmente usa.",
   },
 ];

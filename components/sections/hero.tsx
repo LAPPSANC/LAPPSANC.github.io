@@ -54,7 +54,10 @@ export function Hero() {
           título. Flota de forma continua y muy sutil, con un brillo
           metálico ocasional sobre el icono. */}
       <div className="container-page flex flex-col items-center text-center mb-20 sm:mb-28">
-        <BrandMark size="lg" float />
+        <div className="relative flex items-center justify-center">
+          <span className="neon-ring" aria-hidden />
+          <BrandMark size="lg" float />
+        </div>
       </div>
 
       <div className="container-page grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-12 lg:gap-16 items-center">
@@ -87,7 +90,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.75, duration: 0.6 }}
-            className="mt-3 text-sm sm:text-base font-medium text-primary"
+            className="mt-3 text-sm sm:text-base font-semibold text-neon"
           >
             Convierte las visitas de Facebook, Instagram y WhatsApp en posibles clientes.
           </motion.p>

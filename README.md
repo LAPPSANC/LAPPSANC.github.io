@@ -86,7 +86,7 @@ mensaje con los datos capturados y abre WhatsApp automáticamente. Si defines
 
 ### Imágenes
 
-- `foto-carlos.jpg` → fotografía real ya integrada en la sección "Sobre mí" (formato 4:5).
+- La sección "Sobre LAPP SANC" (`components/sections/about.tsx`) ya no usa una fotografía personal — muestra el logotipo de la marca con un resplandor decorativo. Si más adelante quieres volver a mostrar una fotografía del equipo, agrégala en `public/images/` y reemplaza el bloque de `<BrandMark size="lg" float />` por un `<Image>` de `next/image`.
 - El logotipo de LAPP SANC (`public/images/lapp-sanc-logo.png`) ya está integrado en el
   navbar, el Hero y el pie de página mediante el componente `components/layout/brand-mark.tsx`.
 - `og-image.jpg` → imagen real de vista previa al compartir en Facebook/WhatsApp (1200×630px),

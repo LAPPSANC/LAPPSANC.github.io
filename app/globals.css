@@ -119,6 +119,9 @@
   --animate-pulse-dot: pulse-dot 2s ease-in-out infinite;
   --animate-marquee: marquee 30s linear infinite;
   --animate-shimmer: shimmer 6s ease-in-out infinite;
+  --animate-neon-pulse: neon-pulse 3.2s ease-in-out infinite;
+  --animate-neon-ring: neon-ring 3.2s ease-in-out infinite;
+  --animate-neon-box-pulse: neon-box-pulse 3.2s ease-in-out infinite;
 }
 
 @keyframes float {
@@ -141,6 +144,47 @@
 @keyframes marquee {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
+}
+
+/* Brillo "neón" para texto y botones — usa el mismo azul de marca, solo
+   con un resplandor más intenso, para no romper la paleta de la página. */
+@keyframes neon-pulse {
+  0%, 100% {
+    text-shadow:
+      0 0 6px color-mix(in srgb, var(--primary-light) 70%, transparent),
+      0 0 18px color-mix(in srgb, var(--primary) 45%, transparent);
+  }
+  50% {
+    text-shadow:
+      0 0 12px color-mix(in srgb, var(--primary-light) 90%, transparent),
+      0 0 30px color-mix(in srgb, var(--primary) 65%, transparent);
+  }
+}
+
+/* Anillo de resplandor detrás de un elemento (por ejemplo, el logotipo). */
+@keyframes neon-ring {
+  0%, 100% {
+    opacity: 0.35;
+    transform: scale(0.96);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.04);
+  }
+}
+
+/* Resplandor pulsante para bordes/sombras (botones neón). */
+@keyframes neon-box-pulse {
+  0%, 100% {
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--primary-light) 55%, transparent),
+      0 0 12px color-mix(in srgb, var(--primary) 45%, transparent);
+  }
+  50% {
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--primary-light) 85%, transparent),
+      0 0 24px color-mix(in srgb, var(--primary) 70%, transparent);
+  }
 }
 
 /* Barrido de brillo metálico muy sutil, usado sobre el icono del logo. */
@@ -225,6 +269,25 @@ h1, h2, h3, h4, h5, h6 {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+
+/* Texto "neón": mismo azul de marca, con un resplandor pulsante en vez de
+   un color nuevo, para que combine con el resto de la identidad. */
+.text-neon {
+  color: var(--primary-light);
+  animation: neon-pulse 3.2s ease-in-out infinite;
+}
+
+/* Anillo de resplandor decorativo, pensado para ir detrás de un logotipo
+   o icono destacado. Se coloca en un contenedor con position: relative. */
+.neon-ring {
+  position: absolute;
+  inset: -18%;
+  border-radius: 999px;
+  background: radial-gradient(circle, color-mix(in srgb, var(--primary) 35%, transparent) 0%, transparent 70%);
+  filter: blur(18px);
+  animation: neon-ring 3.2s ease-in-out infinite;
+  pointer-events: none;
 }
 
 .card-shadow {

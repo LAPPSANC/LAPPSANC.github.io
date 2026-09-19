@@ -4,17 +4,21 @@ import { motion } from "framer-motion";
 import { ArrowRight, Smartphone, ShoppingBag, MessageCircle, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { BrandMark } from "@/components/layout/brand-mark";
-import { Typewriter, typewriterDuration } from "@/components/ui/typewriter";
+import { Typewriter, TypewriterCursor, typewriterDuration } from "@/components/ui/typewriter";
 import { trustIndicators } from "@/lib/content";
 import { buildWhatsAppLink, whatsappMessages } from "@/lib/site-config";
 
-const HEADLINE_LINE_1 = "LLEVA TU NEGOCIO AL SIGUIENTE NIVEL";
-const HEADLINE_LINE_2 = "CON UNA PÁGINA WEB PROFESIONAL";
-const LINE_1_DELAY = 0.5;
-// La segunda línea empieza justo cuando termina de "escribirse" la primera,
-// calculado a partir del propio texto en vez de repetir el número mágico
-// de duración en dos lugares distintos.
-const LINE_2_DELAY = LINE_1_DELAY + typewriterDuration(HEADLINE_LINE_1);
+// Titular corto, en dos tramos de color: el primero en blanco, el segundo
+// con el gradiente violeta → magenta de marca. Se escriben con la misma
+// velocidad para que se sientan como una sola animación continua, no dos
+// bloques separados.
+const HEADLINE_WHITE = "Tecnología que";
+const HEADLINE_GRADIENT = "impulsa tu negocio.";
+const TYPE_SPEED = 0.032;
+const START_DELAY = 0.25;
+const GRADIENT_DELAY = START_DELAY + typewriterDuration(HEADLINE_WHITE, TYPE_SPEED);
+const TOTAL_TYPING_DURATION =
+  typewriterDuration(HEADLINE_WHITE, TYPE_SPEED) + typewriterDuration(HEADLINE_GRADIENT, TYPE_SPEED);
 
 export function Hero() {
   return (
@@ -68,37 +72,27 @@ export function Hero() {
             empuja la columna — y con ella toda la sección — más ancha que
             el viewport. */}
         <div className="min-w-0">
-          <h1 className="font-headline text-[clamp(2rem,7.2vw,3.6rem)] font-bold uppercase tracking-wide leading-[1.14] text-foreground text-balance">
-            <Typewriter text={HEADLINE_LINE_1} delay={LINE_1_DELAY} />
-            <br />
-            <span className="text-silver-gradient">
-              <Typewriter text={HEADLINE_LINE_2} delay={LINE_2_DELAY} />
+          <h1 className="font-display text-[clamp(2.25rem,6.2vw,4.25rem)] font-bold tracking-[-0.01em] leading-[1.08] text-foreground text-balance">
+            <Typewriter text={HEADLINE_WHITE} delay={START_DELAY} speed={TYPE_SPEED} />{" "}
+            <span className="text-gradient text-gradient-glow">
+              <Typewriter text={HEADLINE_GRADIENT} delay={GRADIENT_DELAY} speed={TYPE_SPEED} />
             </span>
+            <TypewriterCursor startDelay={START_DELAY} typingDuration={TOTAL_TYPING_DURATION} />
           </h1>
 
           <motion.p
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.6, duration: 0.6 }}
+            transition={{ delay: 1.45, duration: 0.6 }}
             className="mt-6 text-base sm:text-lg text-foreground-muted leading-relaxed max-w-xl"
           >
-            Creo páginas web y catálogos digitales para que tus clientes puedan conocer tus
-            productos, servicios, promociones y formas de contacto desde cualquier dispositivo.
-          </motion.p>
-
-          <motion.p
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.75, duration: 0.6 }}
-            className="mt-3 text-sm sm:text-base font-semibold text-neon"
-          >
-            Convierte las visitas de Facebook, Instagram y WhatsApp en posibles clientes.
+            Web, IA y automatización para hacer crecer tu negocio.
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.9, duration: 0.6 }}
+            transition={{ delay: 1.65, duration: 0.6 }}
             className="mt-9 flex flex-col sm:flex-row gap-3"
           >
             <Button
@@ -106,18 +100,19 @@ export function Hero() {
               target="_blank"
               rel="noopener noreferrer nofollow"
               size="lg"
+              className="animate-neon-box-pulse"
             >
-              Solicitar cotización <ArrowRight size={16} />
+              Cotizar mi proyecto <ArrowRight size={16} />
             </Button>
-            <Button href="#proyectos" variant="secondary" size="lg">
-              Ver proyectos
+            <Button href="#servicios" variant="secondary" size="lg">
+              Ver servicios
             </Button>
           </motion.div>
 
           <motion.ul
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 2.1, duration: 0.6 }}
+            transition={{ delay: 1.85, duration: 0.6 }}
             className="mt-10 grid grid-cols-1 xs:grid-cols-2 gap-x-6 gap-y-3"
           >
             {trustIndicators.map((item) => (

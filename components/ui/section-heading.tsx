@@ -36,6 +36,7 @@ export function SectionHeading({
                 : "border-border-strong text-primary bg-primary-soft"
             )}
           >
+            <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-primary animate-pulse-dot" />
             {eyebrow}
           </span>
         </Reveal>

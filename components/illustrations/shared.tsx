@@ -1,7 +1,7 @@
 /**
  * Lenguaje visual compartido por los iconos del proceso de trabajo:
  * ilustraciones lineales minimalistas, monocromáticas (plata / blanco),
- * con un único acento en azul de marca. Son imágenes estáticas, sin
+ * con un único acento en violeta de marca. Son imágenes estáticas, sin
  * animación, pensadas para sentirse tan cuidadas como un set de iconos de
  * Linear o Vercel.
  */

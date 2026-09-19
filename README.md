@@ -91,29 +91,15 @@ mensaje con los datos capturados y abre WhatsApp automáticamente. Si defines
   navbar, el Hero y el pie de página mediante el componente `components/layout/brand-mark.tsx`.
 - `og-image.jpg` → imagen real de vista previa al compartir en Facebook/WhatsApp (1200×630px),
   generada con el logotipo sobre el fondo de marca.
-- `proyecto-celulares.svg` y `proyecto-materiales.svg` → siguen siendo marcadores de
-  posición; reemplázalos por capturas reales cuando las tengas (ver sección "Proyectos
-  del portafolio" más abajo — ahora cada proyecto usa un arreglo `images`, no un solo
-  archivo `cover`).
-- `public/images/projects/lux-rohe/` → capturas reales ya integradas.
 
-### Proyectos del portafolio
+### Sección de proyectos (retirada)
 
-Edita el arreglo `projects` en `lib/content.ts` para actualizar nombre, descripción,
-problema, solución, tecnologías y capturas de cada proyecto. Cada proyecto tiene un
-arreglo `images` con las rutas de sus capturas de pantalla (una o varias — si hay más de
-una, la tarjeta las rota automáticamente y el modal permite navegarlas con flechas):
-
-```ts
-images: [
-  "/images/projects/mi-proyecto/1-inicio.jpg",
-  "/images/projects/mi-proyecto/2-catalogo.jpg",
-],
-```
-
-Coloca las capturas en `public/images/projects/<nombre-del-proyecto>/`. Para agregar un
-proyecto nuevo, copia un objeto existente y ajústalo; la sección de Proyectos se genera
-automáticamente a partir de esta lista.
+La sección de "Trabajos realizados" y sus componentes (`projects.tsx`, `project-modal.tsx`,
+`project-showcase.tsx`) se quitaron del sitio, y las capturas de ejemplo que tenía se
+eliminaron de `public/images/` para no cargar peso muerto. Si más adelante quieres volver
+a mostrar un portafolio de proyectos reales, dile a Claude que la reconstruya — el patrón
+de datos (`Project` con un arreglo `images`, cada una con su propia descripción) ya está
+documentado en el historial del proyecto y es sencillo de recrear.
 
 ---
 

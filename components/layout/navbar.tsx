@@ -79,7 +79,7 @@ export function Navbar() {
               rel="noopener noreferrer nofollow"
               size="md"
             >
-              Solicitar cotización
+              Cotizar
             </Button>
           </div>
 
@@ -122,7 +122,7 @@ export function Navbar() {
                   rel="noopener noreferrer nofollow"
                   className="mt-2 justify-center"
                 >
-                  Solicitar cotización
+                  Cotizar
                 </Button>
               </div>
             </motion.div>

@@ -17,7 +17,7 @@ export function About() {
             <div className="relative mx-auto flex w-full max-w-sm items-center justify-center rounded-3xl border border-border bg-surface px-8 py-16 card-shadow">
               <div className="relative flex items-center justify-center">
                 {/* Resplandor "neón" detrás del logotipo, con el mismo
-                    azul de marca — un acento llamativo que no rompe la
+                    violeta de marca — un acento llamativo que no rompe la
                     paleta. */}
                 <span className="neon-ring" aria-hidden />
                 <BrandMark size="lg" float />

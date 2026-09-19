@@ -1,35 +1,40 @@
 /**
  * CONFIGURACIÓN DEL SITIO
  * ---------------------------------------------------------------------------
- * Aquí se concentran los datos que normalmente cambian: número de WhatsApp,
- * redes sociales, correo, usuario de GitHub, etc.
+ * Única fuente de verdad para los datos que identifican a la empresa: el
+ * WhatsApp Business de LAPP SANC, correo, dominio y redes OFICIALES de la
+ * marca. Ningún componente debe usar un número o enlace escrito a mano —
+ * todos deben leer de aquí, para que cambiarlo en un solo lugar actualice
+ * todo el sitio.
  *
- * IMPORTANTE: reemplaza los valores marcados como "[EDITAR]" antes de publicar.
- * No se inventó ningún dato sensible o de contacto real.
+ * IMPORTANTE: reemplaza los valores marcados como "[EDITAR]" antes de
+ * publicar. No se inventó ningún dato sensible o de contacto real.
  */
 
 export const siteConfig = {
-  name: "Carlos Manuel Sánchez Martínez",
-  displayName: "Carlos Sánchez", // Nombre del fundador (ya no se muestra en "Sobre LAPP SANC", que ahora presenta la agencia; disponible por si se usa en otro lugar del sitio)
-  shortName: "Carlos",
-  brand: "LAPP SANC", // [EDITAR] si cambia la marca
-  role: "Desarrollador web y creador de soluciones digitales",
+  brand: "LAPP SANC",
+  legalName: "LAPP SANC", // Razón/nombre para el aviso de copyright del footer
+  tagline: "Tecnología para hacer crecer tu negocio",
   location: "Estado de México, México",
-  // [EDITAR] Reemplaza por tu URL real, por ejemplo "https://tu-usuario.github.io/tu-repo"
-  siteUrl: "https://usuario-github.github.io",
+  siteUrl: "https://lappsanc.github.io",
   domain: "[DOMINIO]", // [EDITAR] dominio personalizado, si se contrata uno
 
-  // Número de WhatsApp en formato internacional, sin espacios ni símbolos.
-  // Ejemplo: "521XXXXXXXXXX"
-  whatsappNumber: "[NUMERO_DE_WHATSAPP]", // [EDITAR]
+  // WhatsApp Business de LAPP SANC — número empresarial, no personal.
+  // Formato internacional, sin espacios ni símbolos. Ejemplo: "521XXXXXXXXXX"
+  whatsappNumber: "+5217204735879",
   email: "[CORREO_ELECTRONICO]", // [EDITAR]
 
+  // Redes OFICIALES de la marca únicamente (no perfiles personales). Deja
+  // el valor vacío ("") si todavía no existe la cuenta oficial: los
+  // componentes que consumen esto no muestran el enlace hasta que tenga
+  // un valor real (ver `hasLink` más abajo), así nunca se publica un
+  // enlace roto o un placeholder sin llenar.
   social: {
-    facebook: "[ENLACE_DE_FACEBOOK]", // [EDITAR]
-    instagram: "[ENLACE_DE_INSTAGRAM]", // [EDITAR]
-    tiktok: "[ENLACE_DE_TIKTOK]", // [EDITAR]
-    github: "https://github.com/[USUARIO_DE_GITHUB]", // [EDITAR] — se usa solo internamente (ver README), ya no se muestra como canal de contacto
+    facebook: "", // [EDITAR] página oficial de LAPP SANC, cuando exista
   },
+
+  // Uso interno (no se muestra como canal de contacto en el sitio).
+  githubUser: "[USUARIO_DE_GITHUB]", // [EDITAR]
 
   // Servicio externo opcional para el formulario de contacto (Formspree).
   // Deja vacío para usar únicamente el envío por WhatsApp.
@@ -37,6 +42,13 @@ export const siteConfig = {
 
   ogImage: "/images/og-image.jpg",
 } as const;
+
+/** True si un valor de configuración ya fue llenado (no es "" ni un
+ *  marcador [EDITAR] sin completar). Úsalo antes de renderizar cualquier
+ *  enlace opcional para no publicar un placeholder como si fuera real. */
+export function hasLink(value: string): value is string {
+  return value.trim().length > 0 && !/^\[.*\]$/.test(value.trim());
+}
 
 /** Construye un enlace de WhatsApp con un mensaje predefinido. */
 export function buildWhatsAppLink(message: string) {
@@ -49,11 +61,17 @@ export function buildWhatsAppLink(message: string) {
 
 export const whatsappMessages = {
   general:
-    "¡Hola! 👋 Vi el portafolio de LAPP SANC y me gustaría solicitar información para crear una página web para mi negocio 🚀",
-  cta: "¡Hola! 👋 Encontré el portafolio de LAPP SANC y quiero información sobre una página web para mi negocio 🚀",
+    "¡Hola! 👋 Vi el sitio de LAPP SANC y me gustaría solicitar una cotización para mi proyecto 🚀",
+  cta: "¡Hola! 👋 Quiero hablar con LAPP SANC sobre mi proyecto 🚀",
   /** "¡Hola! 👋 Quiero información para Menú digital 🍽️" */
   service: (serviceName: string, emoji: string) =>
     `¡Hola! 👋 Quiero información para ${serviceName} ${emoji}`,
   project: (projectName: string) =>
     `¡Hola! 👋 Vi el proyecto "${projectName}" en el portafolio de LAPP SANC y me gustaría algo similar para mi negocio ✨`,
+  /** Usado por el plan/tarjeta de precios: "Cotizar este plan". */
+  plan: (planName: string) =>
+    `¡Hola! 👋 Me interesa el ${planName} de LAPP SANC. ¿Podrían darme más información? 📋`,
+  /** Usado por la sección de diagnóstico "¿Qué necesita tu negocio?". */
+  need: (needLabel: string) =>
+    `¡Hola! 👋 ${needLabel} ¿Podrían ayudarme? 🙌`,
 };

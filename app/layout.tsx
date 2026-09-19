@@ -1,12 +1,12 @@
 import type { Metadata, Viewport } from "next";
-import { displayFont, bodyFont, headlineFont } from "@/app/fonts";
+import { displayFont, bodyFont } from "@/app/fonts";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { siteConfig } from "@/lib/site-config";
 import "./globals.css";
 
-const title = "LAPP SANC | Páginas web para negocios y emprendimientos";
+const title = "LAPP SANC | Desarrollo web, IA y automatización para negocios";
 const description =
-  "Desarrollo de páginas web, catálogos digitales y portafolios profesionales para negocios, emprendimientos y prestadores de servicios.";
+  "Agencia digital: páginas web, catálogos digitales, inteligencia artificial y automatización para negocios, emprendimientos y prestadores de servicios.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.siteUrl),
@@ -16,16 +16,18 @@ export const metadata: Metadata = {
   },
   description,
   keywords: [
-    "páginas web para negocios",
-    "desarrollador web México",
+    "desarrollo web para negocios",
+    "landing pages premium",
+    "sitios corporativos",
     "catálogo digital",
-    "portafolio profesional",
+    "inteligencia artificial para negocios",
+    "automatización de procesos",
+    "asistentes de IA para WhatsApp",
     "páginas web Estado de México",
-    "diseño web para emprendimientos",
-    "desarrollo web GitHub Pages",
+    "agencia digital México",
   ],
-  authors: [{ name: siteConfig.name }],
-  creator: siteConfig.name,
+  authors: [{ name: siteConfig.brand }],
+  creator: siteConfig.brand,
   applicationName: siteConfig.brand,
   openGraph: {
     type: "website",
@@ -63,14 +65,33 @@ export const viewport: Viewport = {
   initialScale: 1,
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#050505" },
+    { media: "(prefers-color-scheme: dark)", color: "#07080C" },
   ],
+};
+
+// Datos estructurados (JSON-LD) para que los buscadores entiendan que
+// LAPP SANC es una organización de servicios digitales — sin inventar
+// datos (sin reseñas, calificaciones ni cifras que no existen).
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: siteConfig.brand,
+  url: siteConfig.siteUrl,
+  description,
+  areaServed: siteConfig.location,
+  sameAs: [] as string[],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es-MX" suppressHydrationWarning>
-      <body className={`${displayFont.variable} ${bodyFont.variable} ${headlineFont.variable} font-sans antialiased`}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+      </head>
+      <body className={`${displayFont.variable} ${bodyFont.variable} font-sans antialiased`}>
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>

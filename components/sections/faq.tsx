@@ -46,7 +46,7 @@ function FaqItem({ question, answer }: { question: string; answer: string }) {
 
 export function FAQ() {
   return (
-    <section className="py-24 sm:py-32">
+    <section id="faq" className="section-anchor py-24 sm:py-32">
       <div className="container-page">
         <SectionHeading eyebrow="Preguntas frecuentes" title="Resolvemos tus dudas" />
 

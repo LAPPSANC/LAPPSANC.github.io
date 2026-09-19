@@ -3,42 +3,49 @@
 import * as React from "react";
 import { motion } from "framer-motion";
 import { Send, Mail, MessageCircle, CheckCircle2, ArrowUpRight } from "lucide-react";
-import { FacebookIcon, InstagramIcon, TiktokIcon } from "@/components/ui/social-icons";
+import { FacebookIcon } from "@/components/ui/social-icons";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Reveal, RevealGroup, RevealItem } from "@/components/ui/reveal";
-import { siteConfig, buildWhatsAppLink } from "@/lib/site-config";
+import { serviceCategoryMeta, type ServiceCategoryId } from "@/lib/content";
+import { siteConfig, hasLink, buildWhatsAppLink } from "@/lib/site-config";
+import { cn } from "@/lib/utils";
 
 type FormState = {
   name: string;
   business: string;
-  phone: string;
-  businessType: string;
+  contact: string;
   service: string;
-  budget: string;
-  message: string;
+  description: string;
 };
 
 const initialState: FormState = {
   name: "",
   business: "",
-  phone: "",
-  businessType: "",
+  contact: "",
   service: "",
-  budget: "",
-  message: "",
+  description: "",
 };
 
-const contactLinks = [
-  { icon: MessageCircle, label: "WhatsApp", href: buildWhatsAppLink("Hola, Carlos. Quiero hablar sobre un proyecto."), external: true },
-  { icon: Mail, label: "Correo electrónico", href: `mailto:${siteConfig.email}`, external: false },
-  { icon: FacebookIcon, label: "Facebook", href: siteConfig.social.facebook, external: true },
-  { icon: InstagramIcon, label: "Instagram", href: siteConfig.social.instagram, external: true },
-  { icon: TiktokIcon, label: "TikTok", href: siteConfig.social.tiktok, external: true },
-];
+const quoteCategories = Object.keys(serviceCategoryMeta) as ServiceCategoryId[];
 
 export function Contact() {
   const [form, setForm] = React.useState<FormState>(initialState);
   const [status, setStatus] = React.useState<"idle" | "sending" | "sent">("idle");
+
+  const contactLinks = [
+    {
+      icon: MessageCircle,
+      label: "WhatsApp Business",
+      href: buildWhatsAppLink("¡Hola! 👋 Quiero hablar sobre mi proyecto."),
+      external: true,
+    },
+    ...(hasLink(siteConfig.email)
+      ? [{ icon: Mail, label: "Correo electrónico", href: `mailto:${siteConfig.email}`, external: false }]
+      : []),
+    ...(hasLink(siteConfig.social.facebook)
+      ? [{ icon: FacebookIcon, label: "Facebook", href: siteConfig.social.facebook, external: true }]
+      : []),
+  ];
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -46,14 +53,12 @@ export function Contact() {
 
   function buildMessage() {
     const lines = [
-      "Hola, Carlos. Quiero contarte sobre mi negocio:",
+      "¡Hola! 👋 Quiero solicitar una cotización con LAPP SANC:",
       `Nombre: ${form.name || "-"}`,
-      `Negocio: ${form.business || "-"}`,
-      `Teléfono: ${form.phone || "-"}`,
-      `Tipo de negocio: ${form.businessType || "-"}`,
-      `Servicio que necesita: ${form.service || "-"}`,
-      form.budget ? `Presupuesto aproximado: ${form.budget}` : null,
-      `Mensaje: ${form.message || "-"}`,
+      form.business ? `Negocio/marca: ${form.business}` : null,
+      `WhatsApp o contacto: ${form.contact || "-"}`,
+      `Servicio: ${form.service || "Por definir"}`,
+      `Descripción: ${form.description || "-"}`,
     ].filter(Boolean);
     return lines.join("\n");
   }
@@ -86,9 +91,9 @@ export function Contact() {
     <section id="contacto" className="section-anchor py-24 sm:py-32 bg-background-alt">
       <div className="container-page">
         <SectionHeading
-          eyebrow="Contacto"
-          title="Cuéntame sobre tu negocio"
-          description="Envíame un mensaje con la idea de tu proyecto. Podemos revisar qué tipo de página se adapta mejor a tus necesidades."
+          eyebrow="Cotización"
+          title="Cuéntanos sobre tu proyecto"
+          description="Selecciona qué necesitas y déjanos tus datos. Te respondemos directo por WhatsApp Business."
         />
 
         <div className="mt-16 grid lg:grid-cols-[0.9fr_1.1fr] gap-10">
@@ -124,54 +129,70 @@ export function Contact() {
               onSubmit={handleSubmit}
               className="rounded-2xl border border-border bg-surface p-6 sm:p-8 card-shadow"
             >
-              <div className="grid sm:grid-cols-2 gap-4">
+              <p className="mb-2 text-xs font-medium uppercase tracking-wide text-foreground-subtle">
+                ¿Qué necesitas?
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {quoteCategories.map((id) => {
+                  const meta = serviceCategoryMeta[id];
+                  const active = form.service === meta.label;
+                  return (
+                    <button
+                      key={id}
+                      type="button"
+                      onClick={() => setForm((prev) => ({ ...prev, service: active ? "" : meta.label }))}
+                      aria-pressed={active}
+                      className={cn(
+                        "rounded-full border px-3.5 py-1.5 text-xs font-medium transition-all duration-200 cursor-pointer",
+                        active
+                          ? "border-primary bg-primary-soft text-primary"
+                          : "border-border text-foreground-muted hover:border-primary/40 hover:text-foreground active:border-primary/40 active:text-foreground"
+                      )}
+                    >
+                      {meta.shortLabel}
+                    </button>
+                  );
+                })}
+                <button
+                  type="button"
+                  onClick={() => setForm((prev) => ({ ...prev, service: prev.service === "Otro" ? "" : "Otro" }))}
+                  aria-pressed={form.service === "Otro"}
+                  className={cn(
+                    "rounded-full border px-3.5 py-1.5 text-xs font-medium transition-all duration-200 cursor-pointer",
+                    form.service === "Otro"
+                      ? "border-primary bg-primary-soft text-primary"
+                      : "border-border text-foreground-muted hover:border-primary/40 hover:text-foreground active:border-primary/40 active:text-foreground"
+                  )}
+                >
+                  Otro
+                </button>
+              </div>
+
+              <div className="mt-6 grid sm:grid-cols-2 gap-4">
                 <Field label="Nombre" name="name" value={form.name} onChange={handleChange} required />
+                <Field label="Negocio o marca" name="business" value={form.business} onChange={handleChange} />
                 <Field
-                  label="Nombre del negocio"
-                  name="business"
-                  value={form.business}
+                  label="WhatsApp o medio de contacto"
+                  name="contact"
+                  value={form.contact}
                   onChange={handleChange}
-                />
-                <Field
-                  label="Número de teléfono"
-                  name="phone"
-                  value={form.phone}
-                  onChange={handleChange}
-                  type="tel"
-                />
-                <Field
-                  label="Tipo de negocio"
-                  name="businessType"
-                  value={form.businessType}
-                  onChange={handleChange}
-                />
-                <Field
-                  label="Servicio que necesita"
-                  name="service"
-                  value={form.service}
-                  onChange={handleChange}
-                />
-                <Field
-                  label="Presupuesto aproximado (opcional)"
-                  name="budget"
-                  value={form.budget}
-                  onChange={handleChange}
+                  required
                 />
               </div>
 
               <div className="mt-4">
-                <label htmlFor="message" className="mb-1.5 block text-xs font-medium text-foreground-muted">
-                  Mensaje
+                <label htmlFor="description" className="mb-1.5 block text-xs font-medium text-foreground-muted">
+                  Cuéntanos brevemente sobre tu proyecto
                 </label>
                 <textarea
-                  id="message"
-                  name="message"
+                  id="description"
+                  name="description"
                   rows={4}
-                  value={form.message}
+                  value={form.description}
                   onChange={handleChange}
                   required
                   className="w-full rounded-xl border border-border bg-background px-4 py-2.5 text-sm text-foreground outline-none transition-all duration-300 focus:border-primary focus:shadow-[0_0_0_4px_var(--primary-soft)]"
-                  placeholder="Cuéntame brevemente qué necesitas para tu negocio"
+                  placeholder="¿Qué necesita tu negocio?"
                 />
               </div>
 
@@ -187,14 +208,14 @@ export function Contact() {
                     </>
                   ) : (
                     <>
-                      Enviar solicitud por WhatsApp{" "}
+                      Solicitar cotización{" "}
                       <Send size={16} className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5" />
                     </>
                   )}
                 </button>
               </motion.div>
-              <p className="mt-3 text-center text-xs text-foreground-subtle">
-                Al enviar, se abrirá WhatsApp con tu mensaje ya preparado.
+              <p className="mt-3 text-center text-xs text-foreground-muted">
+                Al enviar, se abrirá WhatsApp Business con tu mensaje ya preparado.
               </p>
             </form>
           </Reveal>

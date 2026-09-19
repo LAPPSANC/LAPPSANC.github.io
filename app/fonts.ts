@@ -18,16 +18,3 @@ export const bodyFont = localFont({
   display: "swap",
   weight: "300 700",
 });
-
-/**
- * Tipografía del titular principal del Hero: Orbitron (variable), un
- * geométrico de carácter tecnológico/automotriz que combina con el trazo
- * del logotipo. Se usa únicamente en el H1, no en toda la interfaz, para
- * no perder la limpieza tipográfica del resto del sitio.
- */
-export const headlineFont = localFont({
-  src: "./fonts/orbitron-variable.woff2",
-  variable: "--font-headline",
-  display: "swap",
-  weight: "400 900",
-});

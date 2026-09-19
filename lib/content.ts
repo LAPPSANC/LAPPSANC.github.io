@@ -9,7 +9,6 @@ import {
   ImageIcon,
   ListChecks,
   MessageCircle,
-  FileText,
   ShoppingBag,
   Briefcase,
   User,
@@ -40,16 +39,21 @@ import {
   Globe2,
   Bot,
   PhoneCall,
+  Building2,
+  Search,
+  ClipboardCheck,
+  Workflow,
+  Server,
+  LayoutTemplate,
+  Sparkles,
 } from "lucide-react";
 
 export const navLinks = [
-  { href: "#inicio", label: "Inicio" },
-  { href: "#beneficios", label: "Beneficios" },
   { href: "#servicios", label: "Servicios" },
-  { href: "#proyectos", label: "Proyectos" },
+  { href: "#soluciones", label: "Soluciones" },
+  { href: "#planes", label: "Planes" },
   { href: "#proceso", label: "Proceso" },
-  { href: "#sobre-mi", label: "Nosotros" },
-  { href: "#contacto", label: "Contacto" },
+  { href: "#faq", label: "FAQ" },
 ];
 
 export const trustIndicators = [
@@ -118,9 +122,35 @@ export const benefits: Benefit[] = [
   },
 ];
 
+export type ServiceCategoryId = "desarrollo" | "conversion" | "ia" | "infraestructura";
+
+export const serviceCategoryMeta: Record<ServiceCategoryId, { label: string; shortLabel: string; description: string }> = {
+  desarrollo: {
+    label: "Desarrollo web",
+    shortLabel: "Desarrollo web",
+    description: "Páginas, catálogos y experiencias digitales a la medida de tu negocio.",
+  },
+  conversion: {
+    label: "Conversión y crecimiento",
+    shortLabel: "Conversión",
+    description: "Herramientas para convertir visitas en clientes reales.",
+  },
+  ia: {
+    label: "Inteligencia artificial y automatización",
+    shortLabel: "IA y automatización",
+    description: "Que tu negocio atienda y trabaje solo, sin perder el trato humano.",
+  },
+  infraestructura: {
+    label: "Infraestructura",
+    shortLabel: "Infraestructura",
+    description: "Todo lo necesario para que tu sitio funcione y siga vigente.",
+  },
+};
+
 export type Service = {
   icon: LucideIcon;
   title: string;
+  category: ServiceCategoryId;
   /** Usado en el mensaje de WhatsApp: "Quiero información para {title} {emoji}" */
   emoji: string;
   description: string;
@@ -130,10 +160,19 @@ export type Service = {
 
 export const services: Service[] = [
   {
-    icon: FileText,
-    title: "Página web informativa",
+    icon: LayoutTemplate,
+    title: "Landing Pages Premium",
+    category: "desarrollo",
+    emoji: "✨",
+    description: "Una sola página, diseñada para convertir:",
+    items: ["Presenta una marca, producto o campaña", "Enfocada en un solo objetivo", "Diseño a la medida", "Optimizada para WhatsApp"],
+  },
+  {
+    icon: Building2,
+    title: "Sitios corporativos",
+    category: "desarrollo",
     emoji: "🌐",
-    description: "Ideal para negocios que necesitan mostrar:",
+    description: "Presencia digital completa para negocios que necesitan mostrar:",
     items: [
       "Quiénes son",
       "Qué servicios ofrecen",
@@ -147,6 +186,7 @@ export const services: Service[] = [
   {
     icon: ShoppingBag,
     title: "Catálogo digital",
+    category: "desarrollo",
     emoji: "🛍️",
     description: "Ideal para mostrar:",
     items: ["Productos", "Fotografías", "Precios", "Características", "Categorías", "Promociones", "Botón de WhatsApp"],
@@ -155,6 +195,7 @@ export const services: Service[] = [
   {
     icon: Briefcase,
     title: "Página para servicios profesionales",
+    category: "desarrollo",
     emoji: "💼",
     description: "Dirigida a:",
     items: ["Abogados", "Contadores", "Arquitectos", "Técnicos", "Fotógrafos", "Profesores", "Consultores", "Profesionistas independientes"],
@@ -162,6 +203,7 @@ export const services: Service[] = [
   {
     icon: User,
     title: "Portafolio profesional",
+    category: "desarrollo",
     emoji: "📁",
     description: "Para mostrar:",
     items: ["Experiencia", "Trabajos realizados", "Habilidades", "Proyectos", "Información de contacto"],
@@ -169,13 +211,48 @@ export const services: Service[] = [
   {
     icon: UtensilsCrossed,
     title: "Menú digital",
+    category: "desarrollo",
     emoji: "🍽️",
     description: "Para restaurantes, cafeterías, reposterías y negocios de comida:",
     items: ["Platillos", "Precios", "Bebidas", "Promociones", "Horarios", "Pedidos mediante WhatsApp"],
   },
   {
+    icon: PartyPopper,
+    title: "Invitaciones digitales para eventos",
+    category: "desarrollo",
+    emoji: "🎉",
+    description: "Ideal para celebrar sin imprimir nada:",
+    items: ["Bodas", "XV años", "Bautizos", "Cumpleaños", "Graduaciones", "Eventos empresariales"],
+    note: "Se comparten con un enlace, sin costo de impresión ni envíos.",
+  },
+  {
+    icon: Search,
+    title: "Optimización SEO",
+    category: "conversion",
+    emoji: "🔍",
+    description: "Para que tu negocio aparezca cuando lo buscan:",
+    items: ["Optimización técnica", "Metadatos y descripciones", "Estructura pensada para buscadores", "Buenas prácticas de contenido"],
+  },
+  {
+    icon: MessageCircle,
+    title: "Integración con WhatsApp",
+    category: "conversion",
+    emoji: "💬",
+    description: "Conecta tu sitio con WhatsApp Business:",
+    items: ["Botones directos en cada sección", "Mensajes pre-armados por producto o servicio", "Contacto en un solo toque", "Sin perder al visitante en el camino"],
+  },
+  {
+    icon: ClipboardCheck,
+    title: "Formularios inteligentes",
+    category: "conversion",
+    emoji: "📝",
+    description: "Diseñados para capturar oportunidades reales:",
+    items: ["Solo los campos necesarios", "Envío directo a WhatsApp", "Validación y buena experiencia móvil", "Sin fricción para el visitante"],
+  },
+  {
     icon: Bot,
     title: "Asistentes de IA para WhatsApp y web",
+    category: "ia",
     emoji: "🤖",
     description: "Atención automática, entrenada con la información real de tu negocio:",
     items: [
@@ -190,6 +267,7 @@ export const services: Service[] = [
   {
     icon: PhoneCall,
     title: "Atención telefónica con IA",
+    category: "ia",
     emoji: "📞",
     description: "Un asistente que también puede contestar llamadas:",
     items: [
@@ -202,30 +280,50 @@ export const services: Service[] = [
     note: "Ideal para negocios que no siempre pueden contestar el teléfono a tiempo.",
   },
   {
+    icon: Workflow,
+    title: "Automatización de procesos",
+    category: "ia",
+    emoji: "⚙️",
+    description: "Menos tareas repetitivas, más tiempo para tu negocio:",
+    items: ["Captura de clientes potenciales", "Notificaciones automáticas", "Organización de datos", "Seguimiento de clientes"],
+    note: "Cada automatización se diseña según el proceso específico del negocio.",
+  },
+  {
+    icon: Globe2,
+    title: "Dominios",
+    category: "infraestructura",
+    emoji: "🌍",
+    description: "Registro y configuración de tu dominio propio.",
+    items: ["Asesoría para elegir el dominio correcto", "Configuración técnica incluida", "Conexión directa con tu sitio"],
+  },
+  {
+    icon: Server,
+    title: "Hosting",
+    category: "infraestructura",
+    emoji: "🖥️",
+    description: "Alojamiento y configuración para publicar tu sitio.",
+    items: ["Publicación y configuración inicial", "Certificado de seguridad (HTTPS)", "Acompañamiento en la puesta en marcha"],
+  },
+  {
+    icon: Rocket,
+    title: "Publicación de páginas",
+    category: "infraestructura",
+    emoji: "🚀",
+    description: "Incluye:",
+    items: ["Configuración de hosting", "Vinculación de dominio, cuando el cliente tenga uno", "Optimización básica", "Configuración de enlaces y botones"],
+  },
+  {
     icon: RefreshCcw,
     title: "Rediseño de páginas",
+    category: "infraestructura",
     emoji: "🔄",
     description: "Para mejorar sitios antiguos o poco adaptables a teléfonos.",
     items: ["Diseño moderno", "Optimización móvil", "Mejora de velocidad", "Actualización de contenido"],
   },
   {
-    icon: Rocket,
-    title: "Publicación de páginas",
-    emoji: "🚀",
-    description: "Incluye:",
-    items: ["Configuración de GitHub Pages", "Vinculación de dominio, cuando el cliente tenga uno", "Optimización básica", "Configuración de enlaces y botones"],
-  },
-  {
-    icon: PartyPopper,
-    title: "Invitaciones digitales para eventos",
-    emoji: "🎉",
-    description: "Ideal para celebrar sin imprimir nada:",
-    items: ["Bodas", "XV años", "Bautizos", "Cumpleaños", "Graduaciones", "Eventos empresariales"],
-    note: "Se comparten con un enlace, sin costo de impresión ni envíos.",
-  },
-  {
     icon: Wrench,
     title: "Mantenimiento",
+    category: "infraestructura",
     emoji: "🛠️",
     description: "Servicio opcional que incluye:",
     items: ["Cambio de precios", "Actualización de productos", "Modificación de fotografías", "Nuevas promociones", "Ajustes de textos", "Corrección de enlaces"],
@@ -267,164 +365,43 @@ export const businessTypes: BusinessType[] = [
   { icon: Lightbulb, label: "Emprendimientos" },
 ];
 
-export type ProjectImage = { src: string; caption: string };
-
-export type Project = {
-  slug: string;
-  name: string;
-  type: string;
-  description: string;
-  problem: string;
-  solution: string;
-  tech: string[];
-  /** Capturas reales del sitio, en el orden en que deben mostrarse, cada
-   *  una con una descripción breve de lo que muestra. */
-  images: ProjectImage[];
-};
-
-export const projects: Project[] = [
-  {
-    slug: "tecnomax",
-    name: "TecnoMax",
-    type: "Tienda de celulares y accesorios",
-    description:
-      "Catálogo de teléfonos nuevos y seminuevos con accesorios, promociones activas, contacto y ubicación de la tienda.",
-    problem: "Los clientes preguntaban precios repetidamente por mensaje directo sin un catálogo claro ni promociones visibles.",
-    solution:
-      "Catálogo filtrable por marca y estado del equipo, sección de promociones con temporizador, y contacto directo por WhatsApp con ubicación de la tienda física.",
-    tech: ["HTML5", "CSS3", "JavaScript"],
-    images: [
-      {
-        src: "/images/projects/tecnomax/1-inicio.jpg",
-        caption: "Hero con las marcas disponibles y accesos directos por categoría.",
-      },
-      {
-        src: "/images/projects/tecnomax/2-telefonos.jpg",
-        caption: "Catálogo de equipos nuevos y seminuevos, filtrable por marca y estado.",
-      },
-      {
-        src: "/images/projects/tecnomax/3-accesorios.jpg",
-        caption: "Fundas, cargadores y audífonos organizados por categoría.",
-      },
-      {
-        src: "/images/projects/tecnomax/4-promociones.jpg",
-        caption: "Ofertas activas con temporizador de tiempo límite.",
-      },
-      {
-        src: "/images/projects/tecnomax/5-contacto.jpg",
-        caption: "Formulario de contacto que envía el mensaje directo por WhatsApp.",
-      },
-      {
-        src: "/images/projects/tecnomax/6-ubicacion.jpg",
-        caption: "Mapa con la dirección de la tienda física y horarios de atención.",
-      },
-    ],
-  },
-  {
-    slug: "lux-rohe",
-    name: "Lux ROHE",
-    type: "Marca de velas artesanales",
-    description:
-      "Proyecto enfocado en presentar productos artesanales, identidad visual, catálogo, información de la marca y contacto.",
-    problem:
-      "La marca solo vendía a través de redes sociales y sus productos se perdían entre publicaciones antiguas.",
-    solution:
-      "Un catálogo visual y elegante que refleja la identidad artesanal de la marca, con contacto directo por WhatsApp.",
-    tech: ["HTML5", "CSS3", "JavaScript"],
-    images: [
-      {
-        src: "/images/projects/lux-rohe/1-inicio.jpg",
-        caption: "Inicio con la esencia de la marca y su colección destacada.",
-      },
-      {
-        src: "/images/projects/lux-rohe/2-coleccion.jpg",
-        caption: "Las tres líneas de producto: velas, plantas y aceites esenciales.",
-      },
-      {
-        src: "/images/projects/lux-rohe/3-catalogo.jpg",
-        caption: "Catálogo filtrable con fotografía, nombre y precio de cada pieza.",
-      },
-    ],
-  },
-  {
-    slug: "block-master",
-    name: "Block Master",
-    type: "Fábrica de blocks para construcción",
-    description:
-      "Sitio para una fábrica de blocks de concreto: catálogo de productos con precios, ventajas de la marca, cobertura de entrega y cotización en línea.",
-    problem:
-      "El negocio no tenía forma de mostrar su catálogo completo ni de recibir cotizaciones fuera del mostrador o por llamada.",
-    solution:
-      "Catálogo filtrable por tipo de block con precios, sección de cobertura con mapa de entregas, y un formulario de cotización express conectado a WhatsApp.",
-    tech: ["HTML5", "CSS3", "JavaScript"],
-    images: [
-      {
-        src: "/images/projects/block-master/1-inicio.jpg",
-        caption: "Presentación de la marca con cifras de experiencia y cobertura.",
-      },
-      {
-        src: "/images/projects/block-master/2-catalogo.jpg",
-        caption: "Catálogo de blocks filtrable por tipo, con medidas, resistencia y precio.",
-      },
-      {
-        src: "/images/projects/block-master/3-ventajas.jpg",
-        caption: "Cinco razones que distinguen a la marca frente a la competencia.",
-      },
-      {
-        src: "/images/projects/block-master/4-cotizacion.jpg",
-        caption: "Formulario de cotización express conectado directo a WhatsApp.",
-      },
-      {
-        src: "/images/projects/block-master/5-ubicacion.jpg",
-        caption: "Mapa de cobertura de entregas, con dirección y horarios.",
-      },
-    ],
-  },
-];
-
 export type ProcessStep = {
   number: string;
   title: string;
   description: string;
-  illustration: "meeting" | "planning" | "design" | "development" | "review" | "launch";
+  illustration: "meeting" | "design" | "development" | "launch" | "review";
 };
 
 export const processSteps: ProcessStep[] = [
   {
     number: "01",
-    title: "Conocemos tu negocio",
-    description: "Me explicas qué vendes, qué servicios ofreces y qué necesitas mostrar.",
+    title: "Hablamos",
+    description: "Conocemos tu negocio, qué necesitas mostrar y qué quieres conseguir.",
     illustration: "meeting",
   },
   {
     number: "02",
-    title: "Planeamos tu proyecto",
-    description: "Definimos secciones, productos, colores, textos, fotografías y formas de contacto.",
-    illustration: "planning",
-  },
-  {
-    number: "03",
-    title: "Diseño",
-    description: "Desarrollo una propuesta visual adaptada a la identidad de tu negocio.",
+    title: "Diseñamos",
+    description: "Definimos estructura, identidad visual y experiencia adaptada a tu negocio.",
     illustration: "design",
   },
   {
-    number: "04",
-    title: "Desarrollo",
-    description: "Construyo el sitio para que funcione correctamente en celulares y computadoras.",
+    number: "03",
+    title: "Desarrollamos",
+    description: "Construimos y optimizamos la solución para que funcione en cualquier dispositivo.",
     illustration: "development",
   },
   {
-    number: "05",
-    title: "Revisión",
-    description: "Puedes solicitar correcciones antes de la publicación final.",
-    illustration: "review",
+    number: "04",
+    title: "Publicamos",
+    description: "Lanzamos tu proyecto, ya configurado y listo para compartirse.",
+    illustration: "launch",
   },
   {
-    number: "06",
-    title: "Publicación",
-    description: "Configuro el sitio para que pueda compartirse mediante un enlace.",
-    illustration: "launch",
+    number: "05",
+    title: "Evolucionamos",
+    description: "Mantenimiento, mejoras, SEO, IA o nuevas funciones conforme tu negocio crece.",
+    illustration: "review",
   },
 ];
 
@@ -487,6 +464,21 @@ export const faqs: FAQ[] = [
     question: "¿La cotización tiene costo?",
     answer: "La primera conversación para conocer tu proyecto y preparar una cotización no tiene costo.",
   },
+  {
+    question: "¿Cuánto cuesta una página web?",
+    answer:
+      "Depende del plan y los servicios que tu proyecto necesite. Cuéntanos qué necesitas y te preparamos una cotización a la medida.",
+  },
+  {
+    question: "¿El dominio y el hosting están incluidos?",
+    answer:
+      "Depende del plan que elijas. También se pueden contratar por separado como servicios de infraestructura.",
+  },
+  {
+    question: "¿Puedo contratar solo un servicio, sin un plan completo?",
+    answer:
+      "Sí. Servicios como SEO, WhatsApp, IA, automatización o mantenimiento también se pueden contratar de forma individual.",
+  },
 ];
 
 export type SkillCategory = { category: string; items: string[] };
@@ -545,5 +537,122 @@ export const agencyPillars: AgencyPillar[] = [
     icon: TrendingUp,
     title: "Soluciones para negocios",
     description: "No solo un sitio: una solución que el negocio realmente usa.",
+  },
+];
+
+/**
+ * Planes comerciales. Sin precios (todavía no están definidos): la
+ * prioridad de esta etapa es la estructura y la conversión, no el número.
+ * Cuando exista una tarifa real, agrégala en el campo `price` de cada
+ * plan y se mostrará automáticamente en la tarjeta.
+ */
+export type Plan = {
+  name: string;
+  tagline: string;
+  audience: string;
+  features: string[];
+  featured?: boolean;
+  price?: string;
+};
+
+export const plans: Plan[] = [
+  {
+    name: "Plan Start",
+    tagline: "Para comenzar bien en internet",
+    audience: "Negocios y proyectos que necesitan una primera presencia digital profesional.",
+    features: [
+      "Landing page",
+      "Diseño responsive",
+      "Integración con WhatsApp Business",
+      "Formulario de contacto",
+      "SEO básico",
+      "Publicación del sitio",
+    ],
+  },
+  {
+    name: "Plan Business",
+    tagline: "Presencia digital completa",
+    audience: "Negocios que necesitan más profundidad de contenido y una imagen más sólida.",
+    features: [
+      "Todo lo del Plan Start",
+      "Más secciones y contenido",
+      "Diseño personalizado",
+      "SEO optimizado",
+      "Formularios inteligentes",
+      "Configuración de dominio y hosting",
+      "Animaciones y microinteracciones",
+    ],
+    featured: true,
+  },
+  {
+    name: "Plan SANC Premium",
+    tagline: "Nuestro producto insignia",
+    audience: "Marcas y empresas que quieren una experiencia digital completamente personalizada.",
+    features: [
+      "Diseño UI/UX 100% a la medida",
+      "Arquitectura personalizada",
+      "Animaciones y microinteracciones avanzadas",
+      "Efectos de profundidad y scroll",
+      "SEO avanzado y optimización de rendimiento",
+      "IA y automatización integradas",
+      "Dominio, hosting y publicación incluidos",
+    ],
+  },
+];
+
+/**
+ * Sección de diagnóstico ("¿Qué necesita tu negocio?") para el visitante
+ * que todavía no sabe qué servicio pedir. Cada opción arma su propio
+ * mensaje de WhatsApp con `whatsappMessages.need`.
+ */
+export type BusinessNeed = { icon: LucideIcon; label: string };
+
+export const businessNeeds: BusinessNeed[] = [
+  { icon: Globe2, label: "Necesito una página web" },
+  { icon: ShoppingBag, label: "Quiero mostrar mis productos" },
+  { icon: TrendingUp, label: "Quiero conseguir más clientes" },
+  { icon: Workflow, label: "Quiero automatizar mi negocio" },
+  { icon: Bot, label: "Quiero implementar inteligencia artificial" },
+  { icon: RefreshCcw, label: "Necesito mejorar mi página actual" },
+];
+
+/**
+ * Sección de confianza: argumentos verificables sobre cómo trabajamos —
+ * sin cifras, clientes ni testimonios inventados. La persuasión viene de
+ * ser específicos sobre el proceso real, no de estadísticas que no
+ * existen todavía.
+ */
+export type TrustPoint = { icon: LucideIcon; title: string; description: string };
+
+export const trustPoints: TrustPoint[] = [
+  {
+    icon: Sparkles,
+    title: "Tecnología moderna, no plantillas",
+    description: "Construimos con Next.js y React: sitios rápidos y a la medida, no una plantilla reciclada.",
+  },
+  {
+    icon: Clock3,
+    title: "Proceso claro, sin sorpresas",
+    description: "Sabes qué pasa en cada etapa, desde la primera conversación hasta la publicación.",
+  },
+  {
+    icon: MessageCircle,
+    title: "Comunicación directa",
+    description: "Hablas por WhatsApp con quien construye tu proyecto — sin intermediarios ni tickets.",
+  },
+  {
+    icon: SmartphoneIcon,
+    title: "Diseño 100% responsive",
+    description: "Tu sitio se ve y funciona igual de bien en celular, tablet y computadora.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Cotización sin costo",
+    description: "La primera conversación para entender tu proyecto no tiene costo ni compromiso.",
+  },
+  {
+    icon: Wrench,
+    title: "Acompañamiento después de publicar",
+    description: "Ofrecemos mantenimiento y mejoras continuas — no desaparecemos al entregar el sitio.",
   },
 ];

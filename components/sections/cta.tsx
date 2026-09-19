@@ -30,13 +30,13 @@ export function CTA() {
       <div className="container-page text-center">
         <Reveal>
           <h2 className="mx-auto max-w-3xl font-display text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-[#0a0a0c] leading-[1.15]">
-            Tu negocio merece algo más que una publicación perdida en redes sociales
+            Tu próximo proyecto puede comenzar aquí
           </h2>
         </Reveal>
         <Reveal delay={0.08}>
           <p className="mx-auto mt-5 max-w-xl text-base sm:text-lg text-[#0a0a0c]/60">
-            Organiza tus productos, servicios y contactos en una página profesional que puedas
-            compartir con cualquier persona.
+            Cuéntanos qué necesita tu negocio y construyamos juntos una solución digital para
+            hacerlo crecer.
           </p>
         </Reveal>
         <Reveal delay={0.16}>
@@ -47,7 +47,7 @@ export function CTA() {
               rel="noopener noreferrer nofollow"
               size="lg"
             >
-              Cotizar mi página <ArrowRight size={16} />
+              Cotizar mi proyecto <ArrowRight size={16} />
             </Button>
             <a
               href={buildWhatsAppLink(whatsappMessages.cta)}
@@ -55,7 +55,7 @@ export function CTA() {
               rel="noopener noreferrer nofollow"
               className="inline-flex items-center justify-center gap-2 rounded-full border border-[#0a0a0c]/15 px-7 py-3.5 text-base font-medium text-[#0a0a0c] transition-colors hover:bg-[#0a0a0c]/5 active:bg-[#0a0a0c]/10"
             >
-              Hablar por WhatsApp <MessageCircle size={16} />
+              Hablar con LAPP SANC <MessageCircle size={16} />
             </a>
           </div>
         </Reveal>

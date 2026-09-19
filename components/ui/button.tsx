@@ -9,13 +9,13 @@ type ButtonSize = "md" | "lg";
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary:
-    "bg-primary text-white shadow-[0_8px_24px_-8px_var(--primary)] hover:bg-primary-hover hover:shadow-[0_10px_30px_-6px_var(--primary)] active:bg-primary-hover active:shadow-[0_10px_30px_-6px_var(--primary)]",
+    "bg-[linear-gradient(135deg,var(--gradient-from),var(--gradient-to))] text-white shadow-[0_8px_28px_-8px_var(--gradient-from)] hover:shadow-[0_10px_36px_-6px_var(--gradient-from),0_0_20px_-4px_var(--accent-magenta)] hover:brightness-110 active:brightness-110",
   secondary:
     "bg-[var(--surface)] text-foreground border border-border-strong hover:border-primary hover:text-primary active:border-primary active:text-primary",
   outline:
     "bg-transparent text-foreground border border-foreground/25 hover:border-foreground hover:bg-foreground/5 active:border-foreground active:bg-foreground/5",
   ghost: "bg-transparent text-foreground-muted hover:text-primary active:text-primary",
-  /* Borde y resplandor pulsante permanentes con el mismo azul de marca —
+  /* Borde y resplandor pulsante permanentes con el mismo violeta de marca —
      pensado para una única llamada a la acción por sección, no para uso
      general (el efecto pierde impacto si se repite demasiado). */
   neon: "bg-[color-mix(in_srgb,var(--primary)_12%,transparent)] text-primary-light border border-primary-light/60 animate-neon-box-pulse hover:bg-[color-mix(in_srgb,var(--primary)_22%,transparent)] active:bg-[color-mix(in_srgb,var(--primary)_22%,transparent)]",
@@ -65,7 +65,7 @@ export function Button({
   }
 
   const classes = cn(
-    "relative inline-flex items-center justify-center gap-2 rounded-full font-medium tracking-tight transition-colors duration-200 cursor-pointer select-none",
+    "relative inline-flex items-center justify-center gap-2 rounded-full font-medium tracking-tight transition-all duration-200 cursor-pointer select-none",
     variantClasses[variant],
     sizeClasses[size],
     className

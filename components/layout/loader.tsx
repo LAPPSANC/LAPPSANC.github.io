@@ -31,7 +31,7 @@ export function Loader() {
       {visible && (
         <motion.div
           key="loader"
-          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#050505] px-6"
+          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#07080C] px-6"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.6, ease: "easeInOut" }}
@@ -88,7 +88,7 @@ export function Loader() {
             transition={{ delay: 0.4, duration: 0.4 }}
           >
             <motion.div
-              className="h-full rounded-full bg-gradient-to-r from-[#5877ab] to-white/80"
+              className="h-full rounded-full bg-gradient-to-r from-[var(--primary)] to-white/80"
               initial={{ width: "0%" }}
               animate={{ width: "100%" }}
               transition={{

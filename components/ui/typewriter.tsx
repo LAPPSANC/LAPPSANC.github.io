@@ -22,6 +22,49 @@ export function typewriterDuration(text: string, speed: number = TYPEWRITER_DEFA
 }
 
 /**
+ * Cursor de escritura: una barra vertical delgada que parpadea mientras
+ * "escribe" y desaparece sola al terminar. Se maneja aparte del texto
+ * (no dentro de Typewriter) porque necesita saber cuándo termina TODA la
+ * animación, incluso si el titular se arma con varias llamadas a
+ * <Typewriter /> en distintos colores.
+ */
+export function TypewriterCursor({
+  startDelay = 0,
+  typingDuration,
+  className,
+}: {
+  /** Segundos antes de que empiece a escribirse el texto. */
+  startDelay?: number;
+  /** Segundos que tarda en "escribirse" todo el texto (usa typewriterDuration). */
+  typingDuration: number;
+  className?: string;
+}) {
+  const [visible, setVisible] = React.useState(true);
+  const [reduceMotion, setReduceMotion] = React.useState(false);
+
+  React.useEffect(() => {
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- solo se ejecuta una vez al montar, para leer una preferencia del sistema
+    setReduceMotion(prefersReduced);
+    if (prefersReduced) return;
+    const timer = setTimeout(() => setVisible(false), (startDelay + typingDuration) * 1000 + 250);
+    return () => clearTimeout(timer);
+  }, [startDelay, typingDuration]);
+
+  if (reduceMotion || !visible) return null;
+
+  return (
+    <motion.span
+      aria-hidden
+      className={className ?? "ml-0.5 inline-block w-[2px] bg-primary-light align-middle"}
+      style={{ height: "0.85em" }}
+      animate={{ opacity: [0, 0, 1, 1, 0, 0] }}
+      transition={{ duration: 0.9, repeat: Infinity, ease: "linear" }}
+    />
+  );
+}
+
+/**
  * Efecto de escritura letra por letra, reservado para el título principal.
  *
  * Cada letra se anima por separado, PERO los espacios se dejan como

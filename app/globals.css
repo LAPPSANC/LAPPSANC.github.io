@@ -6,46 +6,62 @@
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 /*
- * SISTEMA DE DISEÑO — LAPP SANC
+ * SISTEMA DE DISEÑO — LAPP SANC 2.0
  * -------------------------------------------------------------------------
- * Identidad premium inspirada en el logotipo metálico: negro profundo,
- * plata metálica y blanco como contraste, con un azul eléctrico muy sutil
- * reservado únicamente para interacción (botones, enlaces, foco). El tema
- * oscuro es el predeterminado (":root"), ya que es donde el logotipo
- * plateado tiene más presencia; ".light" lo sobreescribe para quien
- * prefiera el modo claro. Todos los colores viven aquí como variables CSS
- * para poder ajustarse desde un solo lugar.
+ * "Premium Tech × Neon × Minimalism": negro carbón como base (80%),
+ * blanco/plata para texto (15%) y violeta/magenta/cian como acento
+ * tecnológico de lujo (5%) — nunca al revés. El tema oscuro es el
+ * predeterminado; ".light" lo sobreescribe para quien prefiera modo claro.
+ * Todos los colores viven aquí como variables CSS para ajustarse desde un
+ * solo lugar.
+ *
+ * Nota de accesibilidad: el violeta de marca (#8B5CF6) se usa para texto,
+ * íconos, bordes y anillos de foco (4.7:1 sobre el fondo, cumple WCAG AA).
+ * Para los botones de relleno sólido con texto blanco se usa un violeta
+ * más profundo (--gradient-from/--gradient-to, 5.7:1 con blanco) en vez
+ * del tono exacto de marca, porque #8B5CF6 con texto blanco encima cae a
+ * 4.2:1 — por debajo del mínimo. Es la misma familia de color, solo un
+ * paso más oscura donde la legibilidad lo exige.
  */
 
 :root {
-  /* Fondo — negro profundo con capas muy sutiles de elevación */
-  --background: #050505;
-  --background-alt: #0a0a0c;
-  --surface: #0d0d10;
-  --surface-alt: #141417;
+  /* Fondo — negro carbón con capas sutiles de elevación */
+  --background: #07080c;
+  --background-alt: #0d1018;
+  --surface: #131722;
+  --surface-alt: #1a1f2e;
 
-  /* Texto — blanco y plata */
-  --foreground: #f4f4f6;
-  --foreground-muted: #9c9ea5;
-  --foreground-subtle: #65666d;
+  /* Texto — blanco/plata */
+  --foreground: #f5f7fa;
+  --foreground-muted: #a7afbf;
+  --foreground-subtle: #8a8d99; /* 6.05:1 sobre el fondo — cumple WCAG AA */
 
-  /* Acento — azul oscuro "mezclado con negro" (no azul eléctrico),
-     reservado únicamente para interacción */
-  --primary: #35507d;
-  --primary-hover: #43649a;
-  --primary-light: #6f88b3;
-  --primary-soft: #0d1119;
+  /* Acento — violeta neón, reservado para interacción y highlights */
+  --primary: #8b5cf6;
+  --primary-hover: #a78bfa;
+  --primary-light: #c4b5fd;
+  --primary-soft: #1b1533;
+
+  /* Gradiente de botones sólidos (violeta → magenta), afinado para que el
+     texto blanco encima siga cumpliendo contraste WCAG AA. */
+  --gradient-from: #7c3aed;
+  --gradient-to: #db2777;
+
+  /* Acentos tecnológicos secundarios — usar con moderación, nunca como
+     color dominante (ver comentario de la regla 80/15/5 arriba). */
+  --accent-magenta: #ec4899;
+  --accent-cyan: #22d3ee;
 
   /* Plata metálica — detalles, iconografía, divisores con carácter */
   --silver: #c7c9cf;
   --silver-strong: #e7e8eb;
 
   /* Bordes y sombras */
-  --border: #1d1d21;
-  --border-strong: #2b2b30;
-  --ring: #35507d;
+  --border: #1e2230;
+  --border-strong: #2a2f42;
+  --ring: #8b5cf6;
 
-  --accent-dark: #f4f4f6;
+  --accent-dark: #f5f7fa;
   --success: #34c98d;
 
   --shadow-color: 0 0% 0%;
@@ -63,30 +79,36 @@
 
 [data-theme="light"] {
   --background: #ffffff;
-  --background-alt: #f4f5f7;
+  --background-alt: #f4f5f9;
   --surface: #ffffff;
-  --surface-alt: #eef0f3;
+  --surface-alt: #eef0f7;
 
   --foreground: #0c0c0e;
   --foreground-muted: #55575f;
-  --foreground-subtle: #8b8d94;
+  --foreground-subtle: #6c6d74; /* 5.15:1 sobre el fondo — cumple WCAG AA */
 
-  --primary: #2a4a85;
-  --primary-hover: #233d6f;
-  --primary-light: #5877ab;
-  --primary-soft: #eaeef4;
+  --primary: #7c3aed;
+  --primary-hover: #6d28d9;
+  --primary-light: #a78bfa;
+  --primary-soft: #f1ebfe;
+
+  --gradient-from: #7c3aed;
+  --gradient-to: #db2777;
+
+  --accent-magenta: #ec4899;
+  --accent-cyan: #0891b2;
 
   --silver: #6b6d74;
   --silver-strong: #3a3b40;
 
   --border: #e4e5e9;
   --border-strong: #d2d3d9;
-  --ring: #2a4a85;
+  --ring: #7c3aed;
 
   --accent-dark: #0c0c0e;
   --success: #1fa971;
 
-  --shadow-color: 220 25% 20%;
+  --shadow-color: 260 30% 25%;
 }
 
 @theme inline {
@@ -103,6 +125,8 @@
   --color-primary-hover: var(--primary-hover);
   --color-primary-light: var(--primary-light);
   --color-primary-soft: var(--primary-soft);
+  --color-accent-magenta: var(--accent-magenta);
+  --color-accent-cyan: var(--accent-cyan);
   --color-silver: var(--silver);
   --color-silver-strong: var(--silver-strong);
   --color-border: var(--border);
@@ -111,7 +135,6 @@
 
   --font-display: var(--font-display);
   --font-body: var(--font-body);
-  --font-headline: var(--font-headline);
 
   --animate-float: float 6s ease-in-out infinite;
   --animate-float-slow: float 9s ease-in-out infinite;
@@ -146,7 +169,7 @@
   to { transform: translateX(-50%); }
 }
 
-/* Brillo "neón" para texto y botones — usa el mismo azul de marca, solo
+/* Brillo "neón" para texto y botones — usa el mismo violeta de marca, solo
    con un resplandor más intenso, para no romper la paleta de la página. */
 @keyframes neon-pulse {
   0%, 100% {
@@ -173,17 +196,21 @@
   }
 }
 
-/* Resplandor pulsante para bordes/sombras (botones neón). */
+/* Resplandor pulsante para bordes/sombras (botones neón): violeta cerca
+   del borde, magenta en el resplandor exterior — el gradiente insignia
+   de la marca, expresado como luz en vez de relleno. */
 @keyframes neon-box-pulse {
   0%, 100% {
     box-shadow:
       0 0 0 1px color-mix(in srgb, var(--primary-light) 55%, transparent),
-      0 0 12px color-mix(in srgb, var(--primary) 45%, transparent);
+      0 0 14px color-mix(in srgb, var(--primary) 50%, transparent),
+      0 0 26px color-mix(in srgb, var(--accent-magenta) 20%, transparent);
   }
   50% {
     box-shadow:
       0 0 0 1px color-mix(in srgb, var(--primary-light) 85%, transparent),
-      0 0 24px color-mix(in srgb, var(--primary) 70%, transparent);
+      0 0 26px color-mix(in srgb, var(--primary) 75%, transparent),
+      0 0 42px color-mix(in srgb, var(--accent-magenta) 35%, transparent);
   }
 }
 
@@ -256,14 +283,20 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .text-gradient {
-  background: linear-gradient(90deg, var(--primary) 0%, var(--primary-light) 100%);
+  background: linear-gradient(90deg, var(--primary) 0%, var(--accent-magenta) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
+/* Resplandor sutil y estático (no pulsante) para texto con gradiente en
+   titulares — la iluminación debe notarse sin competir con la lectura. */
+.text-gradient-glow {
+  filter: drop-shadow(0 0 14px color-mix(in srgb, var(--primary) 35%, transparent));
+}
+
 /* Texto con tratamiento "plata metálica", para titulares que deben
-   combinar con el logotipo sin depender del azul de acento. */
+   combinar con el logotipo sin depender del violeta de acento. */
 .text-silver-gradient {
   background: linear-gradient(120deg, var(--silver-strong) 0%, var(--foreground-muted) 45%, var(--silver-strong) 100%);
   -webkit-background-clip: text;
@@ -271,8 +304,8 @@ h1, h2, h3, h4, h5, h6 {
   color: transparent;
 }
 
-/* Texto "neón": mismo azul de marca, con un resplandor pulsante en vez de
-   un color nuevo, para que combine con el resto de la identidad. */
+/* Texto "neón": mismo violeta de marca, con un resplandor pulsante en vez
+   de un color nuevo, para que combine con el resto de la identidad. */
 .text-neon {
   color: var(--primary-light);
   animation: neon-pulse 3.2s ease-in-out infinite;

@@ -1,6 +1,5 @@
 import type { ComponentType } from "react";
 import { MeetingIllustration } from "./meeting-illustration";
-import { PlanningIllustration } from "./planning-illustration";
 import { DesignIllustration } from "./design-illustration";
 import { DevelopmentIllustration } from "./development-illustration";
 import { ReviewIllustration } from "./review-illustration";
@@ -12,7 +11,6 @@ export const processIllustrations: Record<
   ComponentType<{ className?: string }>
 > = {
   meeting: MeetingIllustration,
-  planning: PlanningIllustration,
   design: DesignIllustration,
   development: DevelopmentIllustration,
   review: ReviewIllustration,
